@@ -2783,20 +2783,23 @@ if ($owner_id != null) {
 	);
 }
 public function listsMembersCreateAll (
-	$list_id, $slug, $screen_name = null, $owner_screen_name = null, $owner_id = null
+	$list_id, $slug, $user_id = null, $screen_name = null, $owner_screen_name = null, $owner_id = null
 )
 	{
-	 // validate
-        if ($list_id== '' || $slug== '') {
-            throw new Exception('Specify a list_id and a slug.');
-        }
+	// validate
+	if ($list_id== '' || $slug== '') {
+		throw new Exception('Specify a list_id and a slug.');
+	}
+	
 	// build parameters
 	$parameters = array();
 	$parameters['list_id'] = (string) $list_id;
 	$parameters['slug'] = (string) $slug;
-if ($screen_name != null) {
-	$parameters['screen_name'] = (string) $screen_name;
-}
+
+	if ($user_id != null) {
+		$parameters['user_id'] = (string) $user_id;
+	}
+	
 if ($owner_screen_name != null) {
 	$parameters['owner_screen_name'] = (string) $owner_screen_name;
 }
@@ -2813,7 +2816,7 @@ public function listsMembersShow (
 	$list_id, $slug, $user_id, $screen_name, $owner_screen_name = null, $owner_id = null, $include_entities = null, $skip_status = null
 )
 	{
-	 // validate
+	// validate
         if ($list_id== '' || $slug== '' || $user_id== '' || $screen_name== '') {
             throw new Exception('Specify a list_id, a slug, a user_id and a ScreenName.');
         }
